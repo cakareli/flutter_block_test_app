@@ -2,10 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_block_test_app/config/injection.dart';
 import 'package:flutter_block_test_app/feature/login/presentation/cubit/login_cubit.dart';
-import 'package:flutter_block_test_app/feature/login/presentation/cubit/login_state.dart';
-import 'package:flutter_block_test_app/feature/login/presentation/pages/login_page.dart';
 import 'package:flutter_block_test_app/feature/login/presentation/pages/splash_screen_page.dart';
-import 'package:flutter_block_test_app/feature/task_list/presentation/pages/task_list_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

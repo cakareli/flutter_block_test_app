@@ -18,7 +18,7 @@ class LoginDataSourceImpl implements LoginDataSource {
   Future<String?> checkAuth() async {
     try {
       String? token = _loginSharedPreferenceService.getToken();
-      await Future.delayed(const Duration(seconds: 2));
+      await Future.delayed(const Duration(seconds: 1));
       return token;
     } catch (e) {
       //error handle
@@ -31,7 +31,7 @@ class LoginDataSourceImpl implements LoginDataSource {
       {required String username, required String password}) async {
     try {
       // login api call
-      await Future.delayed(const Duration(seconds: 2));
+      await Future.delayed(const Duration(seconds: 1));
       if (username != 'test' && password != 'test') {
         throw const UnauthorizedFailure('Invalid credentials');
       }
