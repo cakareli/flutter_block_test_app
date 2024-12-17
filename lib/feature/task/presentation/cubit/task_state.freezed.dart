@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'task_list_state.dart';
+part of 'task_state.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,7 +15,7 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
-mixin _$TaskListState {
+mixin _$TaskState {
   DataLoadingStatus get dataLoadingStatus => throw _privateConstructorUsedError;
   List<TaskEntity> get tasks => throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -57,33 +57,32 @@ mixin _$TaskListState {
   }) =>
       throw _privateConstructorUsedError;
 
-  /// Create a copy of TaskListState
+  /// Create a copy of TaskState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $TaskListStateCopyWith<TaskListState> get copyWith =>
+  $TaskStateCopyWith<TaskState> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $TaskListStateCopyWith<$Res> {
-  factory $TaskListStateCopyWith(
-          TaskListState value, $Res Function(TaskListState) then) =
-      _$TaskListStateCopyWithImpl<$Res, TaskListState>;
+abstract class $TaskStateCopyWith<$Res> {
+  factory $TaskStateCopyWith(TaskState value, $Res Function(TaskState) then) =
+      _$TaskStateCopyWithImpl<$Res, TaskState>;
   @useResult
   $Res call({DataLoadingStatus dataLoadingStatus, List<TaskEntity> tasks});
 }
 
 /// @nodoc
-class _$TaskListStateCopyWithImpl<$Res, $Val extends TaskListState>
-    implements $TaskListStateCopyWith<$Res> {
-  _$TaskListStateCopyWithImpl(this._value, this._then);
+class _$TaskStateCopyWithImpl<$Res, $Val extends TaskState>
+    implements $TaskStateCopyWith<$Res> {
+  _$TaskStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of TaskListState
+  /// Create a copy of TaskState
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -106,7 +105,7 @@ class _$TaskListStateCopyWithImpl<$Res, $Val extends TaskListState>
 
 /// @nodoc
 abstract class _$$InitialImplCopyWith<$Res>
-    implements $TaskListStateCopyWith<$Res> {
+    implements $TaskStateCopyWith<$Res> {
   factory _$$InitialImplCopyWith(
           _$InitialImpl value, $Res Function(_$InitialImpl) then) =
       __$$InitialImplCopyWithImpl<$Res>;
@@ -117,13 +116,13 @@ abstract class _$$InitialImplCopyWith<$Res>
 
 /// @nodoc
 class __$$InitialImplCopyWithImpl<$Res>
-    extends _$TaskListStateCopyWithImpl<$Res, _$InitialImpl>
+    extends _$TaskStateCopyWithImpl<$Res, _$InitialImpl>
     implements _$$InitialImplCopyWith<$Res> {
   __$$InitialImplCopyWithImpl(
       _$InitialImpl _value, $Res Function(_$InitialImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of TaskListState
+  /// Create a copy of TaskState
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -166,7 +165,7 @@ class _$InitialImpl implements _Initial {
 
   @override
   String toString() {
-    return 'TaskListState.initial(dataLoadingStatus: $dataLoadingStatus, tasks: $tasks)';
+    return 'TaskState.initial(dataLoadingStatus: $dataLoadingStatus, tasks: $tasks)';
   }
 
   @override
@@ -183,7 +182,7 @@ class _$InitialImpl implements _Initial {
   int get hashCode => Object.hash(runtimeType, dataLoadingStatus,
       const DeepCollectionEquality().hash(_tasks));
 
-  /// Create a copy of TaskListState
+  /// Create a copy of TaskState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
@@ -254,7 +253,7 @@ class _$InitialImpl implements _Initial {
   }
 }
 
-abstract class _Initial implements TaskListState {
+abstract class _Initial implements TaskState {
   const factory _Initial(
       {final DataLoadingStatus dataLoadingStatus,
       final List<TaskEntity> tasks}) = _$InitialImpl;
@@ -264,7 +263,7 @@ abstract class _Initial implements TaskListState {
   @override
   List<TaskEntity> get tasks;
 
-  /// Create a copy of TaskListState
+  /// Create a copy of TaskState
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)

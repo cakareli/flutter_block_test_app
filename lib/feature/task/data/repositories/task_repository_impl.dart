@@ -1,16 +1,16 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_block_test_app/core/network/failures.dart';
 import 'package:flutter_block_test_app/feature/task/domain/entity/task_entity.dart';
-import 'package:flutter_block_test_app/feature/task_list/data/data_sources/task_list_data_source.dart';
-import 'package:flutter_block_test_app/feature/task_list/domain/repository/task_list_repository.dart';
+import 'package:flutter_block_test_app/feature/task/data/data_source/task_data_source.dart';
+import 'package:flutter_block_test_app/feature/task/domain/repository/task_repository.dart';
 import 'package:injectable/injectable.dart';
 
-@Named('TaskListRepository')
-@LazySingleton(as: TaskListRepository)
-class TaskListRepositoryImpl implements TaskListRepository {
-  final TaskListDataSource taskListDataSource;
+@Named('TaskRepository')
+@LazySingleton(as: TaskRepository)
+class TaskRepositoryImpl implements TaskRepository {
+  final TaskDataSource taskListDataSource;
 
-  TaskListRepositoryImpl(this.taskListDataSource);
+  TaskRepositoryImpl(this.taskListDataSource);
   @override
   Future<Either<Failure, List<TaskEntity>>> getAllTasks() async {
     try {

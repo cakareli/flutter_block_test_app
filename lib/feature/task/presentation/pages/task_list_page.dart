@@ -3,8 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_block_test_app/config/injection.dart';
 import 'package:flutter_block_test_app/feature/login/presentation/cubit/login_cubit.dart';
 import 'package:flutter_block_test_app/feature/login/presentation/pages/login_page.dart';
-import 'package:flutter_block_test_app/feature/task_list/presentation/cubit/task_list_cubit.dart';
-import 'package:flutter_block_test_app/feature/task_list/presentation/cubit/task_list_state.dart';
+import 'package:flutter_block_test_app/feature/task/presentation/cubit/task_cubit.dart';
+import 'package:flutter_block_test_app/feature/task/presentation/cubit/task_state.dart';
 
 class TaskListPage extends StatelessWidget {
   const TaskListPage({super.key});
@@ -25,8 +25,8 @@ class TaskListPage extends StatelessWidget {
         ],
       ),
       body: BlocProvider(
-        create: (context) => getIt<TaskListCubit>()..init(),
-        child: BlocBuilder<TaskListCubit, TaskListState>(
+        create: (context) => getIt<TaskCubit>()..init(),
+        child: BlocBuilder<TaskCubit, TaskState>(
           builder: (context, state) {
             if (state.dataLoadingStatus == DataLoadingStatus.loading ||
                 state.dataLoadingStatus == DataLoadingStatus.initial) {

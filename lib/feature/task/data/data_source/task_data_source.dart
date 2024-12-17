@@ -2,12 +2,12 @@ import 'package:flutter_block_test_app/feature/task/data/model/task_model.dart';
 import 'package:flutter_block_test_app/feature/task/domain/entity/task_entity.dart';
 import 'package:injectable/injectable.dart';
 
-abstract class TaskListDataSource {
+abstract class TaskDataSource {
   Future<List<TaskEntity>> getAllTasks();
 }
 
-@LazySingleton(as: TaskListDataSource)
-class TaskListDataSourceImpl implements TaskListDataSource {
+@LazySingleton(as: TaskDataSource)
+class TaskDataSourceImpl implements TaskDataSource {
   @override
   Future<List<TaskEntity>> getAllTasks() async {
     // api fetch
