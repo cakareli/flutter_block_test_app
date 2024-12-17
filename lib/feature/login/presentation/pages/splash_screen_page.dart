@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_block_test_app/feature/login/presentation/cubit/login_cubit.dart';
 import 'package:flutter_block_test_app/feature/login/presentation/cubit/login_state.dart';
 import 'package:flutter_block_test_app/feature/login/presentation/pages/login_page.dart';
+import 'package:flutter_block_test_app/feature/task_list/presentation/pages/task_list_page.dart';
 
 class SplashScreenPage extends StatefulWidget {
   const SplashScreenPage({super.key});
@@ -18,7 +19,7 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
       listener: (context, state) {
         if (state.authStatus == LoginStatus.signedId) {
           Navigator.of(context).pushReplacement(
-            MaterialPageRoute(builder: (_) => const SizedBox()),
+            MaterialPageRoute(builder: (_) => const TaskListPage()),
           );
         } else if (state.authStatus == LoginStatus.signedOut) {
           Navigator.of(context).pushReplacement(

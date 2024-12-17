@@ -46,4 +46,16 @@ class LoginCubit extends Cubit<LoginState> {
       ));
     });
   }
+
+  Future<void> logout() async {
+    final response = await _loginRepository.logout();
+    response.fold(
+      (l) {},
+      (r) {
+        emit(state.copyWith(
+          authStatus: LoginStatus.signedOut,
+        ));
+      },
+    );
+  }
 }

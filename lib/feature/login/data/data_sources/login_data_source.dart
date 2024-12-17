@@ -47,7 +47,6 @@ class LoginDataSourceImpl implements LoginDataSource {
   Future<void> logout() async {
     try {
       // login api call
-      await Future.delayed(const Duration(seconds: 2));
       await _loginSharedPreferenceService.removeToken();
     } catch (e) {
       //error handle

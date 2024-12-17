@@ -2,18 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_block_test_app/feature/login/presentation/cubit/login_cubit.dart';
 import 'package:flutter_block_test_app/feature/login/presentation/cubit/login_state.dart';
+import 'package:flutter_block_test_app/feature/task_list/presentation/pages/task_list_page.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    final TextEditingController usernameController = TextEditingController();
-    final TextEditingController passwordController = TextEditingController();
-    // !
-    // fetching state of login cubit for specific cases
-    final loginState = context.watch<LoginCubit>().state;
+  State<LoginPage> createState() => _LoginPageState();
+}
 
+class _LoginPageState extends State<LoginPage> {
+  final TextEditingController usernameController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+
+  @override
+  Widget build(BuildContext context) {
+    final loginState = context.watch<LoginCubit>().state;
     return Scaffold(
       appBar: null,
       body: BlocListener<LoginCubit, LoginState>(
@@ -26,6 +30,9 @@ class LoginPage extends StatelessWidget {
                 behavior: SnackBarBehavior.floating, // Floating like a toast
                 margin: EdgeInsets.all(16), // Adds padding around the SnackBar
               ),
+            );
+            Navigator.of(context).pushReplacement(
+              MaterialPageRoute(builder: (_) => const TaskListPage()),
             );
           } else if (state.loginFieldsInputCheck ==
               LoginFieldsInputCheck.failure) {
@@ -78,13 +85,16 @@ class LoginPage extends StatelessWidget {
                             ),
                     ),
                   ),
-                  onTap: () {
+                  onTap: () async {
                     // ! Bloc
-                    context.read<LoginCubit>().login(
+                    await context.read<LoginCubit>().login(
                           username: usernameController.text,
                           password: passwordController.text,
                         );
-
+                    setState(() {
+                      usernameController.clear();
+                      passwordController.clear();
+                    });
                     // ! GetIt
                     // getIt<LoginCubit>().login(
                     //   username: usernameController.text,
