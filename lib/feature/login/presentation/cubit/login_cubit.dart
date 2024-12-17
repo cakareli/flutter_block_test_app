@@ -28,13 +28,22 @@ class LoginCubit extends Cubit<LoginState> {
 
   Future<void> login(
       {required String username, required String password}) async {
-    emit(state.copyWith(authStatus: LoginStatus.loading));
+    emit(state.copyWith(
+      authStatus: LoginStatus.loading,
+      loginFieldsInputCheck: LoginFieldsInputCheck.initial,
+    ));
     final response =
         await _loginRepository.login(username: username, password: password);
     response.fold((l) {
-      emit(state.copyWith(authStatus: LoginStatus.signedOut));
+      emit(state.copyWith(
+        authStatus: LoginStatus.signedOut,
+        loginFieldsInputCheck: LoginFieldsInputCheck.failure,
+      ));
     }, (r) {
-      emit(state.copyWith(authStatus: LoginStatus.signedId));
+      emit(state.copyWith(
+        authStatus: LoginStatus.signedId,
+        loginFieldsInputCheck: LoginFieldsInputCheck.success,
+      ));
     });
   }
 }

@@ -17,19 +17,27 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$LoginState {
   LoginStatus get authStatus => throw _privateConstructorUsedError;
+  LoginFieldsInputCheck get loginFieldsInputCheck =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(LoginStatus authStatus) initial,
+    required TResult Function(
+            LoginStatus authStatus, LoginFieldsInputCheck loginFieldsInputCheck)
+        initial,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(LoginStatus authStatus)? initial,
+    TResult? Function(LoginStatus authStatus,
+            LoginFieldsInputCheck loginFieldsInputCheck)?
+        initial,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(LoginStatus authStatus)? initial,
+    TResult Function(LoginStatus authStatus,
+            LoginFieldsInputCheck loginFieldsInputCheck)?
+        initial,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -63,7 +71,8 @@ abstract class $LoginStateCopyWith<$Res> {
           LoginState value, $Res Function(LoginState) then) =
       _$LoginStateCopyWithImpl<$Res, LoginState>;
   @useResult
-  $Res call({LoginStatus authStatus});
+  $Res call(
+      {LoginStatus authStatus, LoginFieldsInputCheck loginFieldsInputCheck});
 }
 
 /// @nodoc
@@ -82,12 +91,17 @@ class _$LoginStateCopyWithImpl<$Res, $Val extends LoginState>
   @override
   $Res call({
     Object? authStatus = null,
+    Object? loginFieldsInputCheck = null,
   }) {
     return _then(_value.copyWith(
       authStatus: null == authStatus
           ? _value.authStatus
           : authStatus // ignore: cast_nullable_to_non_nullable
               as LoginStatus,
+      loginFieldsInputCheck: null == loginFieldsInputCheck
+          ? _value.loginFieldsInputCheck
+          : loginFieldsInputCheck // ignore: cast_nullable_to_non_nullable
+              as LoginFieldsInputCheck,
     ) as $Val);
   }
 }
@@ -100,7 +114,8 @@ abstract class _$$InitialImplCopyWith<$Res>
       __$$InitialImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({LoginStatus authStatus});
+  $Res call(
+      {LoginStatus authStatus, LoginFieldsInputCheck loginFieldsInputCheck});
 }
 
 /// @nodoc
@@ -117,12 +132,17 @@ class __$$InitialImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? authStatus = null,
+    Object? loginFieldsInputCheck = null,
   }) {
     return _then(_$InitialImpl(
       authStatus: null == authStatus
           ? _value.authStatus
           : authStatus // ignore: cast_nullable_to_non_nullable
               as LoginStatus,
+      loginFieldsInputCheck: null == loginFieldsInputCheck
+          ? _value.loginFieldsInputCheck
+          : loginFieldsInputCheck // ignore: cast_nullable_to_non_nullable
+              as LoginFieldsInputCheck,
     ));
   }
 }
@@ -130,15 +150,20 @@ class __$$InitialImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$InitialImpl implements _Initial {
-  const _$InitialImpl({this.authStatus = LoginStatus.signedOut});
+  const _$InitialImpl(
+      {this.authStatus = LoginStatus.signedOut,
+      this.loginFieldsInputCheck = LoginFieldsInputCheck.initial});
 
   @override
   @JsonKey()
   final LoginStatus authStatus;
+  @override
+  @JsonKey()
+  final LoginFieldsInputCheck loginFieldsInputCheck;
 
   @override
   String toString() {
-    return 'LoginState.initial(authStatus: $authStatus)';
+    return 'LoginState.initial(authStatus: $authStatus, loginFieldsInputCheck: $loginFieldsInputCheck)';
   }
 
   @override
@@ -147,11 +172,14 @@ class _$InitialImpl implements _Initial {
         (other.runtimeType == runtimeType &&
             other is _$InitialImpl &&
             (identical(other.authStatus, authStatus) ||
-                other.authStatus == authStatus));
+                other.authStatus == authStatus) &&
+            (identical(other.loginFieldsInputCheck, loginFieldsInputCheck) ||
+                other.loginFieldsInputCheck == loginFieldsInputCheck));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, authStatus);
+  int get hashCode =>
+      Object.hash(runtimeType, authStatus, loginFieldsInputCheck);
 
   /// Create a copy of LoginState
   /// with the given fields replaced by the non-null parameter values.
@@ -164,27 +192,33 @@ class _$InitialImpl implements _Initial {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(LoginStatus authStatus) initial,
+    required TResult Function(
+            LoginStatus authStatus, LoginFieldsInputCheck loginFieldsInputCheck)
+        initial,
   }) {
-    return initial(authStatus);
+    return initial(authStatus, loginFieldsInputCheck);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(LoginStatus authStatus)? initial,
+    TResult? Function(LoginStatus authStatus,
+            LoginFieldsInputCheck loginFieldsInputCheck)?
+        initial,
   }) {
-    return initial?.call(authStatus);
+    return initial?.call(authStatus, loginFieldsInputCheck);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(LoginStatus authStatus)? initial,
+    TResult Function(LoginStatus authStatus,
+            LoginFieldsInputCheck loginFieldsInputCheck)?
+        initial,
     required TResult orElse(),
   }) {
     if (initial != null) {
-      return initial(authStatus);
+      return initial(authStatus, loginFieldsInputCheck);
     }
     return orElse();
   }
@@ -219,10 +253,14 @@ class _$InitialImpl implements _Initial {
 }
 
 abstract class _Initial implements LoginState {
-  const factory _Initial({final LoginStatus authStatus}) = _$InitialImpl;
+  const factory _Initial(
+      {final LoginStatus authStatus,
+      final LoginFieldsInputCheck loginFieldsInputCheck}) = _$InitialImpl;
 
   @override
   LoginStatus get authStatus;
+  @override
+  LoginFieldsInputCheck get loginFieldsInputCheck;
 
   /// Create a copy of LoginState
   /// with the given fields replaced by the non-null parameter values.

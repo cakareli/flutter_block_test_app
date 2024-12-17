@@ -6,6 +6,8 @@ part 'login_state.freezed.dart';
 class LoginState with _$LoginState {
   const factory LoginState.initial({
     @Default(LoginStatus.signedOut) LoginStatus authStatus,
+    @Default(LoginFieldsInputCheck.initial)
+    LoginFieldsInputCheck loginFieldsInputCheck,
   }) = _Initial;
 }
 
@@ -13,4 +15,10 @@ enum LoginStatus {
   signedId,
   loading,
   signedOut,
+}
+
+enum LoginFieldsInputCheck {
+  initial,
+  failure,
+  success,
 }

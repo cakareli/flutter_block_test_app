@@ -1,3 +1,4 @@
+import 'package:flutter_block_test_app/core/network/failures.dart';
 import 'package:flutter_block_test_app/feature/login/data/data_sources/login_shared_preference_service.dart';
 import 'package:injectable/injectable.dart';
 
@@ -31,6 +32,10 @@ class LoginDataSourceImpl implements LoginDataSource {
     try {
       // login api call
       await Future.delayed(const Duration(seconds: 2));
+      if (username != 'test' && password != 'test') {
+        throw const UnauthorizedFailure('Invalid credentials');
+      }
+
       _loginSharedPreferenceService.saveToken('token123');
     } catch (e) {
       //error handle
