@@ -4,11 +4,22 @@ import 'package:flutter_block_test_app/feature/login/data/data_sources/login_dat
 import 'package:flutter_block_test_app/feature/login/domain/repository/login_repository.dart';
 import 'package:injectable/injectable.dart';
 
+@Named('LoginRepository')
 @LazySingleton(as: LoginRepository)
 class LoginRepositoryImpl implements LoginRepository {
   final LoginDataSource loginDataSource;
 
   LoginRepositoryImpl(this.loginDataSource);
+
+  @override
+  Future<Either<Failure, String?>> checkAuth() async {
+    try {
+      final response = await loginDataSource.checkAuth();
+      return Right(response);
+    } catch (e) {
+      return Left(UnauthorizedFailure(e.toString()));
+    }
+  }
 
   @override
   Future<Either<Failure, void>> login(
