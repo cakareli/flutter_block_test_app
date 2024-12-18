@@ -8,6 +8,7 @@ class TaskState with _$TaskState {
   const factory TaskState.initial({
     @Default(DataLoadingStatus.initial) DataLoadingStatus dataLoadingStatus,
     @Default([]) List<TaskEntity> tasks,
+    TaskEntity? selectedTask,
   }) = _Initial;
 }
 

@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_block_test_app/feature/task/domain/entity/task_entity.dart';
 import 'package:flutter_block_test_app/feature/task/domain/repository/task_repository.dart';
 
 import 'package:flutter_block_test_app/feature/task/presentation/cubit/task_state.dart';
@@ -23,5 +24,9 @@ class TaskCubit extends Cubit<TaskState> {
         tasks: r,
       ));
     });
+  }
+
+  void selectTask(TaskEntity task) {
+    emit(state.copyWith(selectedTask: task));
   }
 }

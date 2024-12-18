@@ -15,6 +15,14 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // ! set TaskCubit globally
+    // MultiBlocProvider(
+    //   providers: [
+    //     BlocProvider<TaskCubit>(create: (_) => getIt<TaskCubit>()..init()),
+    //     BlocProvider<LoginCubit>(create: (_) => getIt<LoginCubit>()),
+    //   ],
+    //   child: const MyApp(),
+    // ),
     return BlocProvider(
       create: (context) => getIt<LoginCubit>()..checkAuth(),
       child: MaterialApp(

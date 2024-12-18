@@ -18,24 +18,25 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$TaskState {
   DataLoadingStatus get dataLoadingStatus => throw _privateConstructorUsedError;
   List<TaskEntity> get tasks => throw _privateConstructorUsedError;
+  TaskEntity? get selectedTask => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(
-            DataLoadingStatus dataLoadingStatus, List<TaskEntity> tasks)
+    required TResult Function(DataLoadingStatus dataLoadingStatus,
+            List<TaskEntity> tasks, TaskEntity? selectedTask)
         initial,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(
-            DataLoadingStatus dataLoadingStatus, List<TaskEntity> tasks)?
+    TResult? Function(DataLoadingStatus dataLoadingStatus,
+            List<TaskEntity> tasks, TaskEntity? selectedTask)?
         initial,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(
-            DataLoadingStatus dataLoadingStatus, List<TaskEntity> tasks)?
+    TResult Function(DataLoadingStatus dataLoadingStatus,
+            List<TaskEntity> tasks, TaskEntity? selectedTask)?
         initial,
     required TResult orElse(),
   }) =>
@@ -69,7 +70,12 @@ abstract class $TaskStateCopyWith<$Res> {
   factory $TaskStateCopyWith(TaskState value, $Res Function(TaskState) then) =
       _$TaskStateCopyWithImpl<$Res, TaskState>;
   @useResult
-  $Res call({DataLoadingStatus dataLoadingStatus, List<TaskEntity> tasks});
+  $Res call(
+      {DataLoadingStatus dataLoadingStatus,
+      List<TaskEntity> tasks,
+      TaskEntity? selectedTask});
+
+  $TaskEntityCopyWith<$Res>? get selectedTask;
 }
 
 /// @nodoc
@@ -89,6 +95,7 @@ class _$TaskStateCopyWithImpl<$Res, $Val extends TaskState>
   $Res call({
     Object? dataLoadingStatus = null,
     Object? tasks = null,
+    Object? selectedTask = freezed,
   }) {
     return _then(_value.copyWith(
       dataLoadingStatus: null == dataLoadingStatus
@@ -99,7 +106,25 @@ class _$TaskStateCopyWithImpl<$Res, $Val extends TaskState>
           ? _value.tasks
           : tasks // ignore: cast_nullable_to_non_nullable
               as List<TaskEntity>,
+      selectedTask: freezed == selectedTask
+          ? _value.selectedTask
+          : selectedTask // ignore: cast_nullable_to_non_nullable
+              as TaskEntity?,
     ) as $Val);
+  }
+
+  /// Create a copy of TaskState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $TaskEntityCopyWith<$Res>? get selectedTask {
+    if (_value.selectedTask == null) {
+      return null;
+    }
+
+    return $TaskEntityCopyWith<$Res>(_value.selectedTask!, (value) {
+      return _then(_value.copyWith(selectedTask: value) as $Val);
+    });
   }
 }
 
@@ -111,7 +136,13 @@ abstract class _$$InitialImplCopyWith<$Res>
       __$$InitialImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({DataLoadingStatus dataLoadingStatus, List<TaskEntity> tasks});
+  $Res call(
+      {DataLoadingStatus dataLoadingStatus,
+      List<TaskEntity> tasks,
+      TaskEntity? selectedTask});
+
+  @override
+  $TaskEntityCopyWith<$Res>? get selectedTask;
 }
 
 /// @nodoc
@@ -129,6 +160,7 @@ class __$$InitialImplCopyWithImpl<$Res>
   $Res call({
     Object? dataLoadingStatus = null,
     Object? tasks = null,
+    Object? selectedTask = freezed,
   }) {
     return _then(_$InitialImpl(
       dataLoadingStatus: null == dataLoadingStatus
@@ -139,6 +171,10 @@ class __$$InitialImplCopyWithImpl<$Res>
           ? _value._tasks
           : tasks // ignore: cast_nullable_to_non_nullable
               as List<TaskEntity>,
+      selectedTask: freezed == selectedTask
+          ? _value.selectedTask
+          : selectedTask // ignore: cast_nullable_to_non_nullable
+              as TaskEntity?,
     ));
   }
 }
@@ -148,7 +184,8 @@ class __$$InitialImplCopyWithImpl<$Res>
 class _$InitialImpl implements _Initial {
   const _$InitialImpl(
       {this.dataLoadingStatus = DataLoadingStatus.initial,
-      final List<TaskEntity> tasks = const []})
+      final List<TaskEntity> tasks = const [],
+      this.selectedTask})
       : _tasks = tasks;
 
   @override
@@ -164,8 +201,11 @@ class _$InitialImpl implements _Initial {
   }
 
   @override
+  final TaskEntity? selectedTask;
+
+  @override
   String toString() {
-    return 'TaskState.initial(dataLoadingStatus: $dataLoadingStatus, tasks: $tasks)';
+    return 'TaskState.initial(dataLoadingStatus: $dataLoadingStatus, tasks: $tasks, selectedTask: $selectedTask)';
   }
 
   @override
@@ -175,12 +215,14 @@ class _$InitialImpl implements _Initial {
             other is _$InitialImpl &&
             (identical(other.dataLoadingStatus, dataLoadingStatus) ||
                 other.dataLoadingStatus == dataLoadingStatus) &&
-            const DeepCollectionEquality().equals(other._tasks, _tasks));
+            const DeepCollectionEquality().equals(other._tasks, _tasks) &&
+            (identical(other.selectedTask, selectedTask) ||
+                other.selectedTask == selectedTask));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, dataLoadingStatus,
-      const DeepCollectionEquality().hash(_tasks));
+      const DeepCollectionEquality().hash(_tasks), selectedTask);
 
   /// Create a copy of TaskState
   /// with the given fields replaced by the non-null parameter values.
@@ -193,33 +235,33 @@ class _$InitialImpl implements _Initial {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(
-            DataLoadingStatus dataLoadingStatus, List<TaskEntity> tasks)
+    required TResult Function(DataLoadingStatus dataLoadingStatus,
+            List<TaskEntity> tasks, TaskEntity? selectedTask)
         initial,
   }) {
-    return initial(dataLoadingStatus, tasks);
+    return initial(dataLoadingStatus, tasks, selectedTask);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(
-            DataLoadingStatus dataLoadingStatus, List<TaskEntity> tasks)?
+    TResult? Function(DataLoadingStatus dataLoadingStatus,
+            List<TaskEntity> tasks, TaskEntity? selectedTask)?
         initial,
   }) {
-    return initial?.call(dataLoadingStatus, tasks);
+    return initial?.call(dataLoadingStatus, tasks, selectedTask);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(
-            DataLoadingStatus dataLoadingStatus, List<TaskEntity> tasks)?
+    TResult Function(DataLoadingStatus dataLoadingStatus,
+            List<TaskEntity> tasks, TaskEntity? selectedTask)?
         initial,
     required TResult orElse(),
   }) {
     if (initial != null) {
-      return initial(dataLoadingStatus, tasks);
+      return initial(dataLoadingStatus, tasks, selectedTask);
     }
     return orElse();
   }
@@ -256,12 +298,15 @@ class _$InitialImpl implements _Initial {
 abstract class _Initial implements TaskState {
   const factory _Initial(
       {final DataLoadingStatus dataLoadingStatus,
-      final List<TaskEntity> tasks}) = _$InitialImpl;
+      final List<TaskEntity> tasks,
+      final TaskEntity? selectedTask}) = _$InitialImpl;
 
   @override
   DataLoadingStatus get dataLoadingStatus;
   @override
   List<TaskEntity> get tasks;
+  @override
+  TaskEntity? get selectedTask;
 
   /// Create a copy of TaskState
   /// with the given fields replaced by the non-null parameter values.

@@ -3,14 +3,18 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_block_test_app/config/injection.dart';
 import 'package:flutter_block_test_app/feature/login/presentation/cubit/login_cubit.dart';
 import 'package:flutter_block_test_app/feature/login/presentation/pages/login_page.dart';
+
 import 'package:flutter_block_test_app/feature/task/presentation/cubit/task_cubit.dart';
 import 'package:flutter_block_test_app/feature/task/presentation/cubit/task_state.dart';
+import 'package:flutter_block_test_app/feature/task/presentation/pages/task_page.dart';
+import 'package:flutter_block_test_app/feature/task/presentation/widgets/task_item_widget.dart';
 
 class TaskListPage extends StatelessWidget {
   const TaskListPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final taskCubit = getIt<TaskCubit>();
     return Scaffold(
       appBar: AppBar(
         title: const Text('Task List'),
@@ -25,13 +29,17 @@ class TaskListPage extends StatelessWidget {
         ],
       ),
       body: BlocProvider(
-        create: (context) => getIt<TaskCubit>()..init(),
+        create: (context) => taskCubit..init(),
         child: BlocBuilder<TaskCubit, TaskState>(
           builder: (context, state) {
             if (state.dataLoadingStatus == DataLoadingStatus.loading ||
                 state.dataLoadingStatus == DataLoadingStatus.initial) {
-              return const Column(
-                children: [CircularProgressIndicator()],
+              return const SizedBox(
+                width: double.infinity,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [CircularProgressIndicator()],
+                ),
               );
             } else if (state.dataLoadingStatus == DataLoadingStatus.failure) {
               return const Column(
@@ -42,52 +50,19 @@ class TaskListPage extends StatelessWidget {
             return ListView.builder(
               itemCount: state.tasks.length,
               itemBuilder: (context, index) {
-                return Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 10),
-                      child: SizedBox(
-                        height: 70,
-                        width: double.infinity,
-                        child: Row(
-                          children: [
-                            Text(
-                              'Task: ${state.tasks[index].id}',
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 20.0),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  SizedBox(
-                                    width:
-                                        MediaQuery.sizeOf(context).width * 0.7,
-                                    child: Text(
-                                      state.tasks[index].name,
-                                      maxLines: 2,
-                                      overflow: TextOverflow.ellipsis,
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width:
-                                        MediaQuery.sizeOf(context).width * 0.7,
-                                    child: Text(
-                                      state.tasks[index].description,
-                                      maxLines: 2,
-                                      overflow: TextOverflow.ellipsis,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            )
-                          ],
+                return GestureDetector(
+                    onTap: () {
+                      context.read<TaskCubit>().selectTask(state.tasks[index]);
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => TaskPage(taskCubit: taskCubit),
                         ),
-                      ),
-                    ),
-                    if (state.tasks[index] != state.tasks.last) const Divider()
-                  ],
-                );
+                      );
+                    },
+                    child: TaskItem(
+                      isLast: state.tasks[index] != state.tasks.last,
+                      task: state.tasks[index],
+                    ));
               },
             );
           },
