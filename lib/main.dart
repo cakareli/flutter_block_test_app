@@ -27,11 +27,14 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (context) => getIt<LoginCubit>()..checkAuth(),
         ),
+
+        /// init() won't be triggered untill TaskCubit is used because cubit is lazySingleton
         BlocProvider(
           create: (context) => getIt<TaskCubit>()..init(),
         ),
       ],
       child: BlocConsumer<LoginCubit, LoginState>(
+        /// Listens if during session user logs out
         listenWhen: (previous, current) {
           return previous.authStatus == LoginStatus.signedId &&
               current.authStatus == LoginStatus.signedOut;

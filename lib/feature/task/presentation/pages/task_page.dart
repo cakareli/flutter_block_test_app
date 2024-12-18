@@ -5,13 +5,21 @@ import 'package:flutter_block_test_app/feature/task/presentation/cubit/task_cubi
 import 'package:flutter_block_test_app/feature/task/presentation/cubit/task_state.dart';
 
 class TaskPage extends StatelessWidget {
-  const TaskPage({required this.taskCubit, super.key});
+  const TaskPage({
+    required this.taskCubit,
+    required this.index,
+    super.key,
+  });
 
   final TaskCubit taskCubit;
+  final int index;
 
   /// BlocProvider.value cubit
   /// With this approach, we need taskCubit from constructor
   /// Using BlocProvider.value
+  /// Available in child widgets
+  /// Good when the Cubit is shared across multiple widgets.
+  /// cubit can be used with context.read or context.watch
   @override
   Widget build(BuildContext context) {
     return BlocProvider.value(
@@ -29,7 +37,7 @@ class TaskPage extends StatelessWidget {
           }
           return Scaffold(
             appBar: AppBar(
-              title: Text('Task ${state.selectedTask!.id}'),
+              title: Text('Task $index'),
             ),
             body: Column(
               children: [
@@ -50,6 +58,9 @@ class TaskPage extends StatelessWidget {
   }
 
   /// Directly reference cubit
+  /// Only accessible to the specific BlocBuilder.
+  /// Good when only one widget needs to listen to the Cubit.
+  /// cubit must be passed through constructor to be used in child widgets
   // @override
   // Widget build(BuildContext context) {
   //   return BlocBuilder<TaskCubit, TaskState>(

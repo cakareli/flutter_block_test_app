@@ -71,6 +71,7 @@ class _TaskListPageState extends State<TaskListPage> {
                     MaterialPageRoute(
                       builder: (context) => TaskPage(
                         taskCubit: context.read<TaskCubit>(),
+                        index: index + 1,
                       ),
                     ),
                   );
