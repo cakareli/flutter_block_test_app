@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_block_test_app/feature/task/data/data_source/task_data_source.dart';
 import 'package:flutter_block_test_app/feature/task/domain/entity/task_entity.dart';
 import 'package:flutter_block_test_app/feature/task/domain/repository/task_repository.dart';
 
@@ -34,9 +35,10 @@ class TaskCubit extends Cubit<TaskState> {
     try {
       emit(state.copyWith(addTaskStatus: AddTaskStatus.loading));
       final currentTasks = [...state.tasks];
+
       currentTasks.add(
         TaskEntity(
-          id: currentTasks.length + 1,
+          id: uuid.v4(),
           name: 'New Task',
           description: 'New created task for testing purpose',
           createdAt: DateTime.now(),
@@ -52,11 +54,11 @@ class TaskCubit extends Cubit<TaskState> {
     }
   }
 
-  void removeTask({required int taskId}) {
+  void removeTask({required String taskId}) {
     try {
       emit(state.copyWith(removeTaskStatus: RemoveTaskStatus.loading));
       final currentTasks = [...state.tasks];
-      currentTasks.removeAt(taskId);
+      currentTasks.removeWhere((item) => item.id == taskId);
       emit(state.copyWith(
         removeTaskStatus: RemoveTaskStatus.success,
         tasks: currentTasks,

@@ -6,11 +6,13 @@ class TaskItem extends StatelessWidget {
   const TaskItem({
     required this.task,
     required this.isLast,
+    required this.index,
     super.key,
   });
 
   final TaskEntity task;
   final bool isLast;
+  final int index;
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +26,7 @@ class TaskItem extends StatelessWidget {
             child: Row(
               children: [
                 Text(
-                  'Task: ${task.id}',
+                  'Task: $index',
                 ),
                 Padding(
                   padding: const EdgeInsets.only(left: 20.0),

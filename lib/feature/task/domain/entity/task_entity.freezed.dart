@@ -20,7 +20,7 @@ TaskEntity _$TaskEntityFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$TaskEntity {
-  int get id => throw _privateConstructorUsedError;
+  String get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
   DateTime get createdAt => throw _privateConstructorUsedError;
@@ -41,7 +41,7 @@ abstract class $TaskEntityCopyWith<$Res> {
           TaskEntity value, $Res Function(TaskEntity) then) =
       _$TaskEntityCopyWithImpl<$Res, TaskEntity>;
   @useResult
-  $Res call({int id, String name, String description, DateTime createdAt});
+  $Res call({String id, String name, String description, DateTime createdAt});
 }
 
 /// @nodoc
@@ -68,7 +68,7 @@ class _$TaskEntityCopyWithImpl<$Res, $Val extends TaskEntity>
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -93,7 +93,7 @@ abstract class _$$TaskEntityImplCopyWith<$Res>
       __$$TaskEntityImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int id, String name, String description, DateTime createdAt});
+  $Res call({String id, String name, String description, DateTime createdAt});
 }
 
 /// @nodoc
@@ -118,7 +118,7 @@ class __$$TaskEntityImplCopyWithImpl<$Res>
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -148,7 +148,7 @@ class _$TaskEntityImpl with DiagnosticableTreeMixin implements _TaskEntity {
       _$$TaskEntityImplFromJson(json);
 
   @override
-  final int id;
+  final String id;
   @override
   final String name;
   @override
@@ -208,7 +208,7 @@ class _$TaskEntityImpl with DiagnosticableTreeMixin implements _TaskEntity {
 
 abstract class _TaskEntity implements TaskEntity {
   const factory _TaskEntity(
-      {required final int id,
+      {required final String id,
       required final String name,
       required final String description,
       required final DateTime createdAt}) = _$TaskEntityImpl;
@@ -217,7 +217,7 @@ abstract class _TaskEntity implements TaskEntity {
       _$TaskEntityImpl.fromJson;
 
   @override
-  int get id;
+  String get id;
   @override
   String get name;
   @override

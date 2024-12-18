@@ -8,7 +8,7 @@ part of 'task_entity.dart';
 
 _$TaskEntityImpl _$$TaskEntityImplFromJson(Map<String, dynamic> json) =>
     _$TaskEntityImpl(
-      id: (json['id'] as num).toInt(),
+      id: json['id'] as String,
       name: json['name'] as String,
       description: json['description'] as String,
       createdAt: DateTime.parse(json['createdAt'] as String),

@@ -7,7 +7,7 @@ part 'task_entity.g.dart';
 @freezed
 class TaskEntity with _$TaskEntity {
   const factory TaskEntity({
-    required int id,
+    required String id,
     required String name,
     required String description,
     required DateTime createdAt,

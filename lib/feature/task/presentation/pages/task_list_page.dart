@@ -78,11 +78,14 @@ class _TaskListPageState extends State<TaskListPage> {
                   );
                 },
                 onLongPress: () {
-                  context.read<TaskCubit>().removeTask(taskId: index);
+                  context
+                      .read<TaskCubit>()
+                      .removeTask(taskId: state.tasks[index].id);
                 },
                 child: TaskItem(
                   isLast: state.tasks[index] != state.tasks.last,
                   task: state.tasks[index],
+                  index: index + 1,
                 ),
               );
             },
