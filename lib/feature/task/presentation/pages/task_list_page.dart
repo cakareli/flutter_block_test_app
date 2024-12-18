@@ -67,23 +67,31 @@ class _TaskListPageState extends State<TaskListPage> {
             itemCount: state.tasks.length,
             itemBuilder: (context, index) {
               return GestureDetector(
-                  onTap: () {
-                    context.read<TaskCubit>().selectTask(state.tasks[index]);
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => TaskPage(
-                          taskCubit: context.read<TaskCubit>(),
-                        ),
+                onTap: () {
+                  context.read<TaskCubit>().selectTask(state.tasks[index]);
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => TaskPage(
+                        taskCubit: context.read<TaskCubit>(),
                       ),
-                    );
-                  },
-                  child: TaskItem(
-                    isLast: state.tasks[index] != state.tasks.last,
-                    task: state.tasks[index],
-                  ));
+                    ),
+                  );
+                },
+                onLongPress: () {
+                  context.read<TaskCubit>().removeTask(taskId: index);
+                },
+                child: TaskItem(
+                  isLast: state.tasks[index] != state.tasks.last,
+                  task: state.tasks[index],
+                ),
+              );
             },
           );
         },
+      ),
+      floatingActionButton: FloatingActionButton(
+        child: const Icon(Icons.add),
+        onPressed: () => context.read<TaskCubit>().addTask(),
       ),
     );
   }

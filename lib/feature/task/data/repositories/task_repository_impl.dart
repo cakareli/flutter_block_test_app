@@ -17,7 +17,27 @@ class TaskRepositoryImpl implements TaskRepository {
       final response = await taskListDataSource.getAllTasks();
       return Right(response);
     } catch (e) {
-      return Left(UnauthorizedFailure(e.toString()));
+      return Left(ServerFailure(e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> addTask() async {
+    try {
+      final response = await taskListDataSource.addTask();
+      return Right(response);
+    } catch (e) {
+      return Left(ServerFailure(e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> removeTask({required int taskId}) async {
+    try {
+      final response = await taskListDataSource.removeTask(taskId: taskId);
+      return Right(response);
+    } catch (e) {
+      return Left(ServerFailure(e.toString()));
     }
   }
 }

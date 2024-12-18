@@ -29,4 +29,41 @@ class TaskCubit extends Cubit<TaskState> {
   void selectTask(TaskEntity task) {
     emit(state.copyWith(selectedTask: task));
   }
+
+  void addTask() {
+    try {
+      emit(state.copyWith(addTaskStatus: AddTaskStatus.loading));
+      final currentTasks = [...state.tasks];
+      currentTasks.add(
+        TaskEntity(
+          id: currentTasks.length + 1,
+          name: 'New Task',
+          description: 'New created task for testing purpose',
+          createdAt: DateTime.now(),
+        ),
+      );
+      emit(state.copyWith(
+        addTaskStatus: AddTaskStatus.success,
+        tasks: currentTasks,
+      ));
+    } catch (e) {
+      emit(state.copyWith(addTaskStatus: AddTaskStatus.failure));
+      rethrow;
+    }
+  }
+
+  void removeTask({required int taskId}) {
+    try {
+      emit(state.copyWith(removeTaskStatus: RemoveTaskStatus.loading));
+      final currentTasks = [...state.tasks];
+      currentTasks.removeAt(taskId);
+      emit(state.copyWith(
+        removeTaskStatus: RemoveTaskStatus.success,
+        tasks: currentTasks,
+      ));
+    } catch (e) {
+      emit(state.copyWith(removeTaskStatus: RemoveTaskStatus.failure));
+      rethrow;
+    }
+  }
 }

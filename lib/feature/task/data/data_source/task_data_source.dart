@@ -4,6 +4,8 @@ import 'package:injectable/injectable.dart';
 
 abstract class TaskDataSource {
   Future<List<TaskEntity>> getAllTasks();
+  Future<void> addTask();
+  Future<void> removeTask({required int taskId});
 }
 
 @LazySingleton(as: TaskDataSource)
@@ -21,6 +23,18 @@ class TaskDataSourceImpl implements TaskDataSource {
     } catch (e) {
       rethrow;
     }
+  }
+
+  @override
+  Future<void> addTask() {
+    // TODO: implement addTask
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<void> removeTask({required int taskId}) {
+    // TODO: implement removeTask
+    throw UnimplementedError();
   }
 }
 

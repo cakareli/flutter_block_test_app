@@ -4,4 +4,6 @@ import 'package:flutter_block_test_app/feature/task/domain/entity/task_entity.da
 
 abstract class TaskRepository {
   Future<Either<Failure, List<TaskEntity>>> getAllTasks();
+  Future<Either<Failure, void>> addTask();
+  Future<Either<Failure, void>> removeTask({required int taskId});
 }

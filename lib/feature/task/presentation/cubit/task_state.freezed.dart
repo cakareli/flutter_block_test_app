@@ -17,26 +17,40 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$TaskState {
   DataLoadingStatus get dataLoadingStatus => throw _privateConstructorUsedError;
+  RemoveTaskStatus get removeTaskStatus => throw _privateConstructorUsedError;
+  AddTaskStatus get addTaskStatus => throw _privateConstructorUsedError;
   List<TaskEntity> get tasks => throw _privateConstructorUsedError;
   TaskEntity? get selectedTask => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(DataLoadingStatus dataLoadingStatus,
-            List<TaskEntity> tasks, TaskEntity? selectedTask)
+    required TResult Function(
+            DataLoadingStatus dataLoadingStatus,
+            RemoveTaskStatus removeTaskStatus,
+            AddTaskStatus addTaskStatus,
+            List<TaskEntity> tasks,
+            TaskEntity? selectedTask)
         initial,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(DataLoadingStatus dataLoadingStatus,
-            List<TaskEntity> tasks, TaskEntity? selectedTask)?
+    TResult? Function(
+            DataLoadingStatus dataLoadingStatus,
+            RemoveTaskStatus removeTaskStatus,
+            AddTaskStatus addTaskStatus,
+            List<TaskEntity> tasks,
+            TaskEntity? selectedTask)?
         initial,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(DataLoadingStatus dataLoadingStatus,
-            List<TaskEntity> tasks, TaskEntity? selectedTask)?
+    TResult Function(
+            DataLoadingStatus dataLoadingStatus,
+            RemoveTaskStatus removeTaskStatus,
+            AddTaskStatus addTaskStatus,
+            List<TaskEntity> tasks,
+            TaskEntity? selectedTask)?
         initial,
     required TResult orElse(),
   }) =>
@@ -72,6 +86,8 @@ abstract class $TaskStateCopyWith<$Res> {
   @useResult
   $Res call(
       {DataLoadingStatus dataLoadingStatus,
+      RemoveTaskStatus removeTaskStatus,
+      AddTaskStatus addTaskStatus,
       List<TaskEntity> tasks,
       TaskEntity? selectedTask});
 
@@ -94,6 +110,8 @@ class _$TaskStateCopyWithImpl<$Res, $Val extends TaskState>
   @override
   $Res call({
     Object? dataLoadingStatus = null,
+    Object? removeTaskStatus = null,
+    Object? addTaskStatus = null,
     Object? tasks = null,
     Object? selectedTask = freezed,
   }) {
@@ -102,6 +120,14 @@ class _$TaskStateCopyWithImpl<$Res, $Val extends TaskState>
           ? _value.dataLoadingStatus
           : dataLoadingStatus // ignore: cast_nullable_to_non_nullable
               as DataLoadingStatus,
+      removeTaskStatus: null == removeTaskStatus
+          ? _value.removeTaskStatus
+          : removeTaskStatus // ignore: cast_nullable_to_non_nullable
+              as RemoveTaskStatus,
+      addTaskStatus: null == addTaskStatus
+          ? _value.addTaskStatus
+          : addTaskStatus // ignore: cast_nullable_to_non_nullable
+              as AddTaskStatus,
       tasks: null == tasks
           ? _value.tasks
           : tasks // ignore: cast_nullable_to_non_nullable
@@ -138,6 +164,8 @@ abstract class _$$InitialImplCopyWith<$Res>
   @useResult
   $Res call(
       {DataLoadingStatus dataLoadingStatus,
+      RemoveTaskStatus removeTaskStatus,
+      AddTaskStatus addTaskStatus,
       List<TaskEntity> tasks,
       TaskEntity? selectedTask});
 
@@ -159,6 +187,8 @@ class __$$InitialImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? dataLoadingStatus = null,
+    Object? removeTaskStatus = null,
+    Object? addTaskStatus = null,
     Object? tasks = null,
     Object? selectedTask = freezed,
   }) {
@@ -167,6 +197,14 @@ class __$$InitialImplCopyWithImpl<$Res>
           ? _value.dataLoadingStatus
           : dataLoadingStatus // ignore: cast_nullable_to_non_nullable
               as DataLoadingStatus,
+      removeTaskStatus: null == removeTaskStatus
+          ? _value.removeTaskStatus
+          : removeTaskStatus // ignore: cast_nullable_to_non_nullable
+              as RemoveTaskStatus,
+      addTaskStatus: null == addTaskStatus
+          ? _value.addTaskStatus
+          : addTaskStatus // ignore: cast_nullable_to_non_nullable
+              as AddTaskStatus,
       tasks: null == tasks
           ? _value._tasks
           : tasks // ignore: cast_nullable_to_non_nullable
@@ -184,6 +222,8 @@ class __$$InitialImplCopyWithImpl<$Res>
 class _$InitialImpl implements _Initial {
   const _$InitialImpl(
       {this.dataLoadingStatus = DataLoadingStatus.initial,
+      this.removeTaskStatus = RemoveTaskStatus.initial,
+      this.addTaskStatus = AddTaskStatus.initial,
       final List<TaskEntity> tasks = const [],
       this.selectedTask})
       : _tasks = tasks;
@@ -191,6 +231,12 @@ class _$InitialImpl implements _Initial {
   @override
   @JsonKey()
   final DataLoadingStatus dataLoadingStatus;
+  @override
+  @JsonKey()
+  final RemoveTaskStatus removeTaskStatus;
+  @override
+  @JsonKey()
+  final AddTaskStatus addTaskStatus;
   final List<TaskEntity> _tasks;
   @override
   @JsonKey()
@@ -205,7 +251,7 @@ class _$InitialImpl implements _Initial {
 
   @override
   String toString() {
-    return 'TaskState.initial(dataLoadingStatus: $dataLoadingStatus, tasks: $tasks, selectedTask: $selectedTask)';
+    return 'TaskState.initial(dataLoadingStatus: $dataLoadingStatus, removeTaskStatus: $removeTaskStatus, addTaskStatus: $addTaskStatus, tasks: $tasks, selectedTask: $selectedTask)';
   }
 
   @override
@@ -215,14 +261,23 @@ class _$InitialImpl implements _Initial {
             other is _$InitialImpl &&
             (identical(other.dataLoadingStatus, dataLoadingStatus) ||
                 other.dataLoadingStatus == dataLoadingStatus) &&
+            (identical(other.removeTaskStatus, removeTaskStatus) ||
+                other.removeTaskStatus == removeTaskStatus) &&
+            (identical(other.addTaskStatus, addTaskStatus) ||
+                other.addTaskStatus == addTaskStatus) &&
             const DeepCollectionEquality().equals(other._tasks, _tasks) &&
             (identical(other.selectedTask, selectedTask) ||
                 other.selectedTask == selectedTask));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, dataLoadingStatus,
-      const DeepCollectionEquality().hash(_tasks), selectedTask);
+  int get hashCode => Object.hash(
+      runtimeType,
+      dataLoadingStatus,
+      removeTaskStatus,
+      addTaskStatus,
+      const DeepCollectionEquality().hash(_tasks),
+      selectedTask);
 
   /// Create a copy of TaskState
   /// with the given fields replaced by the non-null parameter values.
@@ -235,33 +290,48 @@ class _$InitialImpl implements _Initial {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(DataLoadingStatus dataLoadingStatus,
-            List<TaskEntity> tasks, TaskEntity? selectedTask)
+    required TResult Function(
+            DataLoadingStatus dataLoadingStatus,
+            RemoveTaskStatus removeTaskStatus,
+            AddTaskStatus addTaskStatus,
+            List<TaskEntity> tasks,
+            TaskEntity? selectedTask)
         initial,
   }) {
-    return initial(dataLoadingStatus, tasks, selectedTask);
+    return initial(dataLoadingStatus, removeTaskStatus, addTaskStatus, tasks,
+        selectedTask);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(DataLoadingStatus dataLoadingStatus,
-            List<TaskEntity> tasks, TaskEntity? selectedTask)?
+    TResult? Function(
+            DataLoadingStatus dataLoadingStatus,
+            RemoveTaskStatus removeTaskStatus,
+            AddTaskStatus addTaskStatus,
+            List<TaskEntity> tasks,
+            TaskEntity? selectedTask)?
         initial,
   }) {
-    return initial?.call(dataLoadingStatus, tasks, selectedTask);
+    return initial?.call(dataLoadingStatus, removeTaskStatus, addTaskStatus,
+        tasks, selectedTask);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(DataLoadingStatus dataLoadingStatus,
-            List<TaskEntity> tasks, TaskEntity? selectedTask)?
+    TResult Function(
+            DataLoadingStatus dataLoadingStatus,
+            RemoveTaskStatus removeTaskStatus,
+            AddTaskStatus addTaskStatus,
+            List<TaskEntity> tasks,
+            TaskEntity? selectedTask)?
         initial,
     required TResult orElse(),
   }) {
     if (initial != null) {
-      return initial(dataLoadingStatus, tasks, selectedTask);
+      return initial(dataLoadingStatus, removeTaskStatus, addTaskStatus, tasks,
+          selectedTask);
     }
     return orElse();
   }
@@ -298,11 +368,17 @@ class _$InitialImpl implements _Initial {
 abstract class _Initial implements TaskState {
   const factory _Initial(
       {final DataLoadingStatus dataLoadingStatus,
+      final RemoveTaskStatus removeTaskStatus,
+      final AddTaskStatus addTaskStatus,
       final List<TaskEntity> tasks,
       final TaskEntity? selectedTask}) = _$InitialImpl;
 
   @override
   DataLoadingStatus get dataLoadingStatus;
+  @override
+  RemoveTaskStatus get removeTaskStatus;
+  @override
+  AddTaskStatus get addTaskStatus;
   @override
   List<TaskEntity> get tasks;
   @override
