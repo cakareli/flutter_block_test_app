@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_block_test_app/feature/login/presentation/cubit/login_cubit.dart';
+import 'package:flutter_block_test_app/feature/task/presentation/bloc/task_bloc.dart';
+import 'package:flutter_block_test_app/feature/task/presentation/bloc/task_bloc_event.dart';
+import 'package:flutter_block_test_app/feature/task/presentation/bloc/task_bloc_state.dart';
 import 'package:flutter_block_test_app/feature/task/presentation/cubit/task_cubit.dart';
-import 'package:flutter_block_test_app/feature/task/presentation/cubit/task_state.dart';
+// import 'package:flutter_block_test_app/feature/task/presentation/cubit/task_state.dart';
 import 'package:flutter_block_test_app/feature/task/presentation/pages/task_page.dart';
 import 'package:flutter_block_test_app/feature/task/presentation/widgets/task_item_widget.dart';
 
@@ -44,7 +47,7 @@ class _TaskListPageState extends State<TaskListPage> {
               child: const Text('Log out'))
         ],
       ),
-      body: BlocBuilder<TaskCubit, TaskState>(
+      body: BlocBuilder<TaskBloc, TaskBlocState>(
         builder: (context, state) {
           if (state.dataLoadingStatus == DataLoadingStatus.loading ||
               state.dataLoadingStatus == DataLoadingStatus.initial) {
@@ -66,20 +69,25 @@ class _TaskListPageState extends State<TaskListPage> {
             itemBuilder: (context, index) {
               return GestureDetector(
                 onTap: () {
-                  context.read<TaskCubit>().selectTask(state.tasks[index]);
+                  // context.read<TaskCubit>().selectTask(state.tasks[index]);
+                  context.read<TaskBloc>().add(SelectTask(state.tasks[index]));
                   Navigator.of(context).push(
                     MaterialPageRoute(
                       builder: (context) => TaskPage(
-                        taskCubit: context.read<TaskCubit>(),
+                        // taskCubit: context.read<TaskCubit>(),
+                        taskBloc: context.read<TaskBloc>(),
                         index: index + 1,
                       ),
                     ),
                   );
                 },
                 onLongPress: () {
+                  // context
+                  //     .read<TaskCubit>()
+                  //     .removeTask(taskId: state.tasks[index].id);
                   context
-                      .read<TaskCubit>()
-                      .removeTask(taskId: state.tasks[index].id);
+                      .read<TaskBloc>()
+                      .add(RemoveTask(state.tasks[index].id));
                 },
                 child: TaskItem(
                   isLast: state.tasks[index] != state.tasks.last,
@@ -93,7 +101,8 @@ class _TaskListPageState extends State<TaskListPage> {
       ),
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.add),
-        onPressed: () => context.read<TaskCubit>().addTask(),
+        // onPressed: () => context.read<TaskCubit>().addTask(),
+        onPressed: () => context.read<TaskBloc>().add(const AddTask()),
       ),
     );
   }

@@ -5,6 +5,8 @@ import 'package:flutter_block_test_app/feature/login/presentation/cubit/login_cu
 import 'package:flutter_block_test_app/feature/login/presentation/cubit/login_state.dart';
 import 'package:flutter_block_test_app/feature/login/presentation/pages/login_page.dart';
 import 'package:flutter_block_test_app/feature/login/presentation/pages/splash_screen_page.dart';
+import 'package:flutter_block_test_app/feature/task/presentation/bloc/task_bloc.dart';
+import 'package:flutter_block_test_app/feature/task/presentation/bloc/task_bloc_event.dart';
 import 'feature/task/presentation/cubit/task_cubit.dart';
 
 void main() async {
@@ -28,9 +30,15 @@ class MyApp extends StatelessWidget {
           create: (context) => getIt<LoginCubit>()..checkAuth(),
         ),
 
+        // Using Cubit
         /// init() won't be triggered untill TaskCubit is used because cubit is lazySingleton
+        // BlocProvider(
+        //   create: (context) => getIt<TaskCubit>()..init(),
+        // ),
+        // Using Bloc
         BlocProvider(
-          create: (context) => getIt<TaskCubit>()..init(),
+          create: (context) =>
+              getIt<TaskBloc>()..add(const TaskEvent.initTasks()),
         ),
       ],
       child: BlocConsumer<LoginCubit, LoginState>(

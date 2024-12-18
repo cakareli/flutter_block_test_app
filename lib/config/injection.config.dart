@@ -25,6 +25,8 @@ import 'package:flutter_block_test_app/feature/task/data/repositories/task_repos
     as _i266;
 import 'package:flutter_block_test_app/feature/task/domain/repository/task_repository.dart'
     as _i146;
+import 'package:flutter_block_test_app/feature/task/presentation/bloc/task_bloc.dart'
+    as _i651;
 import 'package:flutter_block_test_app/feature/task/presentation/cubit/task_cubit.dart'
     as _i685;
 import 'package:get_it/get_it.dart' as _i174;
@@ -64,6 +66,11 @@ extension GetItInjectableX on _i174.GetIt {
         loginRepository:
             gh<_i1017.LoginRepository>(instanceName: 'LoginRepository')));
     gh.lazySingleton<_i685.TaskCubit>(() => _i685.TaskCubit(
+          taskRepository:
+              gh<_i146.TaskRepository>(instanceName: 'TaskRepository'),
+          loginCubit: gh<_i422.LoginCubit>(),
+        ));
+    gh.lazySingleton<_i651.TaskBloc>(() => _i651.TaskBloc(
           taskRepository:
               gh<_i146.TaskRepository>(instanceName: 'TaskRepository'),
           loginCubit: gh<_i422.LoginCubit>(),
