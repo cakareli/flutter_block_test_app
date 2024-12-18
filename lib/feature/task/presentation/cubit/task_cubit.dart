@@ -1,4 +1,8 @@
+import 'dart:async';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_block_test_app/feature/login/presentation/cubit/login_cubit.dart';
+import 'package:flutter_block_test_app/feature/login/presentation/cubit/login_state.dart';
 import 'package:flutter_block_test_app/feature/task/data/data_source/task_data_source.dart';
 import 'package:flutter_block_test_app/feature/task/domain/entity/task_entity.dart';
 import 'package:flutter_block_test_app/feature/task/domain/repository/task_repository.dart';
@@ -8,11 +12,28 @@ import 'package:injectable/injectable.dart';
 
 @lazySingleton
 class TaskCubit extends Cubit<TaskState> {
-  TaskCubit({@Named('TaskRepository') required TaskRepository taskRepository})
-      : _taskRepository = taskRepository,
-        super(const TaskState.initial());
+  TaskCubit({
+    @Named('TaskRepository') required TaskRepository taskRepository,
+    required LoginCubit loginCubit,
+  })  : _taskRepository = taskRepository,
+        _loginCubit = loginCubit,
+        super(const TaskState.initial()) {
+    _authSubscription = _loginCubit.stream.listen(_handleAuthStateChange);
+  }
 
   final TaskRepository _taskRepository;
+  final LoginCubit _loginCubit;
+  late final StreamSubscription<LoginState> _authSubscription;
+
+  void _handleAuthStateChange(LoginState loginState) {
+    if (loginState.authStatus == LoginStatus.signedOut) {
+      // Clear tasks on logout
+      emit(const TaskState.initial());
+    } else if (loginState.authStatus == LoginStatus.signedId) {
+      // Reload tasks on login if needed
+      init();
+    }
+  }
 
   void init() async {
     emit(state.copyWith(dataLoadingStatus: DataLoadingStatus.loading));
@@ -25,6 +46,12 @@ class TaskCubit extends Cubit<TaskState> {
         tasks: r,
       ));
     });
+  }
+
+  @override
+  Future<void> close() async {
+    await _authSubscription.cancel();
+    return super.close();
   }
 
   void selectTask(TaskEntity task) {

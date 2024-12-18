@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_block_test_app/feature/login/presentation/cubit/login_cubit.dart';
-import 'package:flutter_block_test_app/feature/login/presentation/pages/login_page.dart';
-
 import 'package:flutter_block_test_app/feature/task/presentation/cubit/task_cubit.dart';
 import 'package:flutter_block_test_app/feature/task/presentation/cubit/task_state.dart';
 import 'package:flutter_block_test_app/feature/task/presentation/pages/task_page.dart';
@@ -40,8 +38,8 @@ class _TaskListPageState extends State<TaskListPage> {
           TextButton(
               onPressed: () async {
                 await context.read<LoginCubit>().logout();
-                Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(builder: (context) => const LoginPage()));
+                // Navigator.of(context).pushReplacement(
+                //     MaterialPageRoute(builder: (context) => const LoginPage()));
               },
               child: const Text('Log out'))
         ],

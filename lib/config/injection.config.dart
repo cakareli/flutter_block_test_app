@@ -60,12 +60,14 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i421.LoginRepositoryImpl(gh<_i208.LoginDataSource>()),
       instanceName: 'LoginRepository',
     );
-    gh.lazySingleton<_i685.TaskCubit>(() => _i685.TaskCubit(
-        taskRepository:
-            gh<_i146.TaskRepository>(instanceName: 'TaskRepository')));
     gh.lazySingleton<_i422.LoginCubit>(() => _i422.LoginCubit(
         loginRepository:
             gh<_i1017.LoginRepository>(instanceName: 'LoginRepository')));
+    gh.lazySingleton<_i685.TaskCubit>(() => _i685.TaskCubit(
+          taskRepository:
+              gh<_i146.TaskRepository>(instanceName: 'TaskRepository'),
+          loginCubit: gh<_i422.LoginCubit>(),
+        ));
     return this;
   }
 }
