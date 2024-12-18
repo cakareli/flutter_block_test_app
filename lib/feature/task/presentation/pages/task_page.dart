@@ -9,7 +9,9 @@ class TaskPage extends StatelessWidget {
 
   final TaskCubit taskCubit;
 
-  // ! BlocProvider.value and global cubit
+  /// BlocProvider.value cubit
+  /// With this approach, we need taskCubit from constructor
+  /// Using BlocProvider.value
   @override
   Widget build(BuildContext context) {
     return BlocProvider.value(
@@ -46,4 +48,75 @@ class TaskPage extends StatelessWidget {
       ),
     );
   }
+
+  /// Directly reference cubit
+  // @override
+  // Widget build(BuildContext context) {
+  //   return BlocBuilder<TaskCubit, TaskState>(
+  //     bloc: taskCubit,
+  //     builder: (context, state) {
+  //       if (state.selectedTask == null) {
+  //         return Scaffold(
+  //           appBar: AppBar(),
+  //           body: const Column(
+  //             mainAxisAlignment: MainAxisAlignment.center,
+  //             children: [CircularProgressIndicator()],
+  //           ),
+  //         );
+  //       }
+  //       return Scaffold(
+  //         appBar: AppBar(
+  //           title: Text('Task ${state.selectedTask!.id}'),
+  //         ),
+  //         body: Column(
+  //           children: [
+  //             Padding(
+  //               padding: const EdgeInsets.all(8.0),
+  //               child: Text(state.selectedTask!.name),
+  //             ),
+  //             Padding(
+  //               padding: const EdgeInsets.all(8.0),
+  //               child: Text(state.selectedTask!.description),
+  //             ),
+  //           ],
+  //         ),
+  //       );
+  //     },
+  //   );
+  // }
+
+  /// Global cubit with GetIt
+  // @override
+  // Widget build(BuildContext context) {
+  //   return BlocBuilder<TaskCubit, TaskState>(
+  //     builder: (context, state) {
+  //       if (state.selectedTask == null) {
+  //         return Scaffold(
+  //           appBar: AppBar(),
+  //           body: const Column(
+  //             mainAxisAlignment: MainAxisAlignment.center,
+  //             children: [CircularProgressIndicator()],
+  //           ),
+  //         );
+  //       }
+  //       return Scaffold(
+  //         appBar: AppBar(
+  //           title: Text('Task ${state.selectedTask!.id}'),
+  //         ),
+  //         body: Column(
+  //           children: [
+  //             Padding(
+  //               padding: const EdgeInsets.all(8.0),
+  //               child: Text(state.selectedTask!.name),
+  //             ),
+  //             Padding(
+  //               padding: const EdgeInsets.all(8.0),
+  //               child: Text(state.selectedTask!.description),
+  //             ),
+  //           ],
+  //         ),
+  //       );
+  //     },
+  //   );
+  // }
 }

@@ -4,6 +4,8 @@ import 'package:flutter_block_test_app/config/injection.dart';
 import 'package:flutter_block_test_app/feature/login/presentation/cubit/login_cubit.dart';
 import 'package:flutter_block_test_app/feature/login/presentation/pages/splash_screen_page.dart';
 
+import 'feature/task/presentation/cubit/task_cubit.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await configureDependencies();
@@ -15,16 +17,16 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // ! set TaskCubit globally
-    // MultiBlocProvider(
-    //   providers: [
-    //     BlocProvider<TaskCubit>(create: (_) => getIt<TaskCubit>()..init()),
-    //     BlocProvider<LoginCubit>(create: (_) => getIt<LoginCubit>()),
-    //   ],
-    //   child: const MyApp(),
-    // ),
-    return BlocProvider(
-      create: (context) => getIt<LoginCubit>()..checkAuth(),
+    /// Global cubit declaration
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => getIt<LoginCubit>()..checkAuth(),
+        ),
+        BlocProvider(
+          create: (context) => getIt<TaskCubit>()..init(),
+        ),
+      ],
       child: MaterialApp(
         title: 'Flutter Demo',
         theme: ThemeData(
