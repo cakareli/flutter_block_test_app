@@ -9,14 +9,14 @@ import '../bloc/task_bloc_state.dart';
 
 class TaskPage extends StatelessWidget {
   const TaskPage({
-    // required this.taskCubit,
-    required this.taskBloc,
+    required this.taskCubit,
+    // required this.taskBloc,
     required this.index,
     super.key,
   });
 
-  // final TaskCubit taskCubit;
-  final TaskBloc taskBloc;
+  final TaskCubit taskCubit;
+  // final TaskBloc taskBloc;
   final int index;
 
   /// BlocProvider.value cubit
@@ -25,42 +25,42 @@ class TaskPage extends StatelessWidget {
   /// Available in child widgets
   /// Good when the Cubit is shared across multiple widgets.
   /// cubit can be used with context.read or context.watch
-  // @override
-  // Widget build(BuildContext context) {
-  //   return BlocProvider.value(
-  //     value: taskCubit,
-  //     child: BlocBuilder<TaskCubit, TaskState>(
-  //       builder: (context, state) {
-  //         if (state.selectedTask == null) {
-  //           return Scaffold(
-  //             appBar: AppBar(),
-  //             body: const Column(
-  //               mainAxisAlignment: MainAxisAlignment.center,
-  //               children: [CircularProgressIndicator()],
-  //             ),
-  //           );
-  //         }
-  //         return Scaffold(
-  //           appBar: AppBar(
-  //             title: Text('Task $index'),
-  //           ),
-  //           body: Column(
-  //             children: [
-  //               Padding(
-  //                 padding: const EdgeInsets.all(8.0),
-  //                 child: Text(state.selectedTask!.name),
-  //               ),
-  //               Padding(
-  //                 padding: const EdgeInsets.all(8.0),
-  //                 child: Text(state.selectedTask!.description),
-  //               ),
-  //             ],
-  //           ),
-  //         );
-  //       },
-  //     ),
-  //   );
-  // }
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider.value(
+      value: taskCubit,
+      child: BlocBuilder<TaskCubit, TaskState>(
+        builder: (context, state) {
+          if (state.selectedTask == null) {
+            return Scaffold(
+              appBar: AppBar(),
+              body: const Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [CircularProgressIndicator()],
+              ),
+            );
+          }
+          return Scaffold(
+            appBar: AppBar(
+              title: Text('Task $index'),
+            ),
+            body: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(state.selectedTask!.name),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(state.selectedTask!.description),
+                ),
+              ],
+            ),
+          );
+        },
+      ),
+    );
+  }
 
   /// Directly reference cubit
   /// Only accessible to the specific BlocBuilder.
@@ -137,40 +137,40 @@ class TaskPage extends StatelessWidget {
   // }
 
   /// Using bloc instead of cubit
-  @override
-  Widget build(BuildContext context) {
-    return BlocProvider.value(
-      value: taskBloc,
-      child: BlocBuilder<TaskBloc, TaskBlocState>(
-        builder: (context, state) {
-          if (state.selectedTask == null) {
-            return Scaffold(
-              appBar: AppBar(),
-              body: const Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [CircularProgressIndicator()],
-              ),
-            );
-          }
-          return Scaffold(
-            appBar: AppBar(
-              title: Text('Task $index'),
-            ),
-            body: Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(state.selectedTask!.name),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(state.selectedTask!.description),
-                ),
-              ],
-            ),
-          );
-        },
-      ),
-    );
-  }
+  // @override
+  // Widget build(BuildContext context) {
+  //   return BlocProvider.value(
+  //     value: taskBloc,
+  //     child: BlocBuilder<TaskBloc, TaskBlocState>(
+  //       builder: (context, state) {
+  //         if (state.selectedTask == null) {
+  //           return Scaffold(
+  //             appBar: AppBar(),
+  //             body: const Column(
+  //               mainAxisAlignment: MainAxisAlignment.center,
+  //               children: [CircularProgressIndicator()],
+  //             ),
+  //           );
+  //         }
+  //         return Scaffold(
+  //           appBar: AppBar(
+  //             title: Text('Task $index'),
+  //           ),
+  //           body: Column(
+  //             children: [
+  //               Padding(
+  //                 padding: const EdgeInsets.all(8.0),
+  //                 child: Text(state.selectedTask!.name),
+  //               ),
+  //               Padding(
+  //                 padding: const EdgeInsets.all(8.0),
+  //                 child: Text(state.selectedTask!.description),
+  //               ),
+  //             ],
+  //           ),
+  //         );
+  //       },
+  //     ),
+  //   );
+  // }
 }

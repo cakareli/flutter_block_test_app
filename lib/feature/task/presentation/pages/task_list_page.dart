@@ -3,9 +3,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_block_test_app/feature/login/presentation/cubit/login_cubit.dart';
 import 'package:flutter_block_test_app/feature/task/presentation/bloc/task_bloc.dart';
 import 'package:flutter_block_test_app/feature/task/presentation/bloc/task_bloc_event.dart';
-import 'package:flutter_block_test_app/feature/task/presentation/bloc/task_bloc_state.dart';
+import 'package:flutter_block_test_app/feature/task/presentation/bloc/task_bloc_state.dart'
+    as bloc_state;
 import 'package:flutter_block_test_app/feature/task/presentation/cubit/task_cubit.dart';
-// import 'package:flutter_block_test_app/feature/task/presentation/cubit/task_state.dart';
+import 'package:flutter_block_test_app/feature/task/presentation/cubit/task_state.dart'
+    as cubit_state;
 import 'package:flutter_block_test_app/feature/task/presentation/pages/task_page.dart';
 import 'package:flutter_block_test_app/feature/task/presentation/widgets/task_item_widget.dart';
 
@@ -47,10 +49,13 @@ class _TaskListPageState extends State<TaskListPage> {
               child: const Text('Log out'))
         ],
       ),
-      body: BlocBuilder<TaskBloc, TaskBlocState>(
+      body: BlocBuilder<TaskCubit, cubit_state.TaskState>(
         builder: (context, state) {
-          if (state.dataLoadingStatus == DataLoadingStatus.loading ||
-              state.dataLoadingStatus == DataLoadingStatus.initial) {
+          // cubit state
+          if (state.dataLoadingStatus ==
+                  cubit_state.DataLoadingStatus.loading ||
+              state.dataLoadingStatus ==
+                  cubit_state.DataLoadingStatus.initial) {
             return const SizedBox(
               width: double.infinity,
               child: Column(
@@ -58,36 +63,55 @@ class _TaskListPageState extends State<TaskListPage> {
                 children: [CircularProgressIndicator()],
               ),
             );
-          } else if (state.dataLoadingStatus == DataLoadingStatus.failure) {
+          } else if (state.dataLoadingStatus ==
+              cubit_state.DataLoadingStatus.failure) {
             return const Column(
               children: [Text('Error')],
             );
           }
+          // bloc state
+          // if (state.dataLoadingStatus ==
+          //         bloc_state.DataLoadingStatus.loading ||
+          //     state.dataLoadingStatus ==
+          //         bloc_state.DataLoadingStatus.initial) {
+          //   return const SizedBox(
+          //     width: double.infinity,
+          //     child: Column(
+          //       mainAxisAlignment: MainAxisAlignment.center,
+          //       children: [CircularProgressIndicator()],
+          //     ),
+          //   );
+          // } else if (state.dataLoadingStatus ==
+          //     bloc_state.DataLoadingStatus.failure) {
+          //   return const Column(
+          //     children: [Text('Error')],
+          //   );
+          // }
 
           return ListView.builder(
             itemCount: state.tasks.length,
             itemBuilder: (context, index) {
               return GestureDetector(
                 onTap: () {
-                  // context.read<TaskCubit>().selectTask(state.tasks[index]);
-                  context.read<TaskBloc>().add(SelectTask(state.tasks[index]));
+                  context.read<TaskCubit>().selectTask(state.tasks[index]);
+                  // context.read<TaskBloc>().add(SelectTask(state.tasks[index]));
                   Navigator.of(context).push(
                     MaterialPageRoute(
                       builder: (context) => TaskPage(
-                        // taskCubit: context.read<TaskCubit>(),
-                        taskBloc: context.read<TaskBloc>(),
+                        taskCubit: context.read<TaskCubit>(),
+                        // taskBloc: context.read<TaskBloc>(),
                         index: index + 1,
                       ),
                     ),
                   );
                 },
                 onLongPress: () {
-                  // context
-                  //     .read<TaskCubit>()
-                  //     .removeTask(taskId: state.tasks[index].id);
                   context
-                      .read<TaskBloc>()
-                      .add(RemoveTask(state.tasks[index].id));
+                      .read<TaskCubit>()
+                      .removeTask(taskId: state.tasks[index].id);
+                  // context
+                  //     .read<TaskBloc>()
+                  //     .add(RemoveTask(state.tasks[index].id));
                 },
                 child: TaskItem(
                   isLast: state.tasks[index] != state.tasks.last,
@@ -101,8 +125,8 @@ class _TaskListPageState extends State<TaskListPage> {
       ),
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.add),
-        // onPressed: () => context.read<TaskCubit>().addTask(),
-        onPressed: () => context.read<TaskBloc>().add(const AddTask()),
+        onPressed: () => context.read<TaskCubit>().addTask(),
+        // onPressed: () => context.read<TaskBloc>().add(const AddTask()),
       ),
     );
   }

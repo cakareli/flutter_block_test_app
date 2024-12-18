@@ -32,14 +32,14 @@ class MyApp extends StatelessWidget {
 
         // Using Cubit
         /// init() won't be triggered untill TaskCubit is used because cubit is lazySingleton
-        // BlocProvider(
-        //   create: (context) => getIt<TaskCubit>()..init(),
-        // ),
-        // Using Bloc
         BlocProvider(
-          create: (context) =>
-              getIt<TaskBloc>()..add(const TaskEvent.initTasks()),
+          create: (context) => getIt<TaskCubit>()..init(),
         ),
+        // Using Bloc
+        // BlocProvider(
+        //   create: (context) =>
+        //       getIt<TaskBloc>()..add(const TaskEvent.initTasks()),
+        // ),
       ],
       child: BlocConsumer<LoginCubit, LoginState>(
         /// Listens if during session user logs out
